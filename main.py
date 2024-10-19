@@ -25,13 +25,14 @@ def fetch_images(query, num_images=10):
         print("Error fetching data from Pixabay.")
         return []
 
-def download_images(image_urls, download_dir):
+def download_images(image_urls, download_dir, file_name_template):
     """
     Downloads images from given URLs and stores them in the specified directory.
     
     Args:
         image_urls (list): List of image URLs to download.
         download_dir (str): The directory to save images.
+        file_name_template (str): The custom file name template.
     
     Returns:
         List of downloaded file paths.
@@ -42,7 +43,7 @@ def download_images(image_urls, download_dir):
     file_paths = []
     for i, url in enumerate(image_urls):
         response = requests.get(url)
-        file_name = f"image_{i+1}.jpg"
+        file_name = f"{file_name_template}_{i+1}.jpg"  # Use custom file name template
         file_path = os.path.join(download_dir, file_name)
         
         with open(file_path, 'wb') as f:
